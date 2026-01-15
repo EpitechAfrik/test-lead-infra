@@ -3,7 +3,7 @@
 ## 🎯 Objectif
 Évaluer rapidement les compétences essentielles d'un Lead Infrastructure & DevOps pour gérer une infrastructure multi-campus (Cotonou, Abidjan).
 
-**Durée : 2 heures **
+**Durée : 2 heures**
 
 ---
 
