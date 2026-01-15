@@ -1,9 +1,9 @@
-# Test Technique – Lead Infrastructure & DevOps (5 heures)
+# Test Technique – Lead Infrastructure & DevOps 
 
 ## 🎯 Objectif
 Évaluer rapidement les compétences essentielles d'un Lead Infrastructure & DevOps pour gérer une infrastructure multi-campus (Cotonou, Abidjan).
 
-**Durée : 5 heures maximum**
+**Durée : 2 heures **
 
 ---
 
