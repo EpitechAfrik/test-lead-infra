@@ -16,7 +16,7 @@
 ## 📋 Structure du Test (3 exercices + Questions)
 
 | Partie | Points |
-|--------|-------|--------|
+|--------|--------|
 | **Exercice 1** : Infrastructure as Code | 35 |
 | **Exercice 2** : Kubernetes & Monitoring | 40 |
 | **Exercice 3** : Architecture Multi-Campus | 15 |
