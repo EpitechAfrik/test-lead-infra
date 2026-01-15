@@ -336,7 +336,6 @@ technical-test-lead-infra/
 ├── network/            (Exercice 3.2)
 ├── monitoring/         (Exercice 4.1)
 ├── security/           (Exercice 4.2)
-├── answers-lead.md     (Partie 5)
 └── README.md           (Instructions globales)
 ```
 
