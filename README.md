@@ -83,7 +83,7 @@ Concevoir l'architecture pour migrer vers AWS.
 
 ---
 
-## 🐳 EXERCICE 2 — Kubernetes & Monitoring (2h)
+## 🐳 EXERCICE 2 — Kubernetes & Monitoring 
 
 ### Contexte
 Déployer une application sur Kubernetes local avec monitoring.
