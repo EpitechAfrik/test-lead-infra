@@ -20,7 +20,7 @@
 | **Exercice 1** : Infrastructure as Code | 35 |
 | **Exercice 2** : Kubernetes & Monitoring | 40 |
 | **Exercice 3** : Architecture Multi-Campus | 15 |
-| **TOTAL**  **100** |
+| **TOTAL** | **100** |
 
 ---
 
