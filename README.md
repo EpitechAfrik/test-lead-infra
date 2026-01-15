@@ -1,396 +1,307 @@
-# Test Technique – Lead Infrastructure & DevOps
+# Test Technique – Lead Infrastructure & DevOps (5 heures)
 
 ## 🎯 Objectif
-Évaluer les compétences d'un Lead Infrastructure & DevOps pour concevoir, déployer et maintenir une infrastructure robuste, sécurisée et scalable pour un environnement multi-campus (Cotonou, Abidjan).
+Évaluer rapidement les compétences essentielles d'un Lead Infrastructure & DevOps pour gérer une infrastructure multi-campus (Cotonou, Abidjan).
+
+**Durée : 5 heures maximum**
 
 ---
 
-## 🖥️ Environnement de test fourni
-- **PC Windows** avec :
-  - Docker Desktop (avec WSL2)
-  - Terraform
-  - Git
-  - VS Code (ou éditeur de votre choix)
-  - Connexion Internet
+## 🖥️ Environnement fourni
+- PC Windows avec : Docker Desktop (WSL2 + Kubernetes), Terraform, Git, VS Code
+- Connexion Internet
 
 ---
 
-## 📋 Structure des exercices
+## 📋 Structure du Test (3 exercices + Questions)
 
-### **Partie 1 : Infrastructure as Code (IaC)** — 35%
-### **Partie 2 : Orchestration & Conteneurisation** — 30%
-### **Partie 3 : Architecture Multi-Campus** — 20%
-### **Partie 4 : Monitoring & Sécurité** — 15%
+| Partie | Points |
+|--------|--------|
+| **Exercice 1** : Infrastructure as Code | 35 |
+| **Exercice 2** : Kubernetes & Monitoring | 40 |
+| **Exercice 3** : Architecture Multi-Campus | 15 |
+| **TOTAL** | **100** |
 
 ---
 
-## 🏗️ PARTIE 1 — Infrastructure as Code (Terraform)
+## 🏗️ EXERCICE 1 — Infrastructure as Code 
 
-### Exercice 1.1 — Provisionnement Cloud Simulé (Local)
-**Contexte :** Vous devez créer une infrastructure reproductible pour héberger les plateformes AEIG (LMS, CRM, Intranet).
+### Contexte
+Créer une infrastructure reproductible pour héberger les plateformes AEIG (LMS, CRM).
 
-**Tâches :**
-1. Créer une infrastructure Terraform qui provisionne **localement** (via Docker provider) :
-   - 3 conteneurs applicatifs (web-cotonou, web-abidjan, web-backup)
-   - 1 conteneur base de données PostgreSQL
-   - 1 conteneur reverse proxy Nginx
-   - 1 réseau privé isolé
+### Tâches
 
-2. Utiliser des **modules Terraform** pour :
-   - Module `network` : création du réseau Docker
-   - Module `database` : déploiement PostgreSQL avec volumes persistants
-   - Module `application` : déploiement des apps avec variables d'environnement
+#### 1.1 Terraform Local (25 points)
+Créer une infrastructure Terraform qui provisionne **localement via Docker** :
 
-3. Implémenter des **workspaces Terraform** :
-   - `dev` : 1 instance de chaque service
-   - `staging` : 2 instances applicatives (load balancing)
-   - `production` : 3 instances + réplication DB
+**Ressources à créer :**
+- 1 réseau Docker privé (`aeig-network`)
+- 1 conteneur PostgreSQL avec volume persistant
+- 2 conteneurs applicatifs (web-cotonou, web-abidjan) basés sur nginx
+- Variables paramétrables (pas de valeurs en dur)
 
-**Livrables :**
+**Structure attendue :**
 ```
 terraform/
 ├── main.tf
 ├── variables.tf
 ├── outputs.tf
-├── terraform.tfvars.example
-├── modules/
-│   ├── network/
-│   ├── database/
-│   └── application/
-└── environments/
-    ├── dev.tfvars
-    ├── staging.tfvars
-    └── production.tfvars
+└── terraform.tfvars.example
 ```
 
-**Critères d'évaluation :**
-- ✅ Code modulaire et réutilisable
-- ✅ Variables paramétrables (pas de valeurs en dur)
-- ✅ State management (local backend documenté)
-- ✅ Documentation des commandes (README)
+**Commandes à documenter dans README.md :**
+```bash
+terraform init
+terraform plan
+terraform apply
+terraform destroy
+```
+
 
 ---
 
-### Exercice 1.2 — Infrastructure Cloud AWS (Conception)
-**Contexte :** AEIG souhaite migrer vers AWS pour bénéficier de la scalabilité cloud.
+#### 1.2 Architecture Cloud AWS 
+Concevoir l'architecture pour migrer vers AWS.
 
-**Tâches :**
-1. Créer un **diagramme d'architecture** (draw.io, Lucidchart, ou ASCII art) montrant :
-   - VPC multi-AZ (2 zones de disponibilité)
-   - Subnets publics/privés
-   - EC2 instances derrière ALB (Application Load Balancer)
+**Livrables :**
+1. **Diagramme d'architecture** (draw.io, Lucidchart, ou schéma texte) montrant :
+   - VPC avec 2 subnets publics + 2 privés
+   - ALB (Application Load Balancer)
+   - EC2 instances
    - RDS PostgreSQL Multi-AZ
-   - S3 pour stockage statique
-   - CloudWatch pour monitoring
-   - VPN Site-to-Site vers campus Cotonou
+   - VPN vers campus Cotonou
 
-2. Écrire le code Terraform pour **VPC + Subnets uniquement** (pas besoin de déployer réellement) :
-   - VPC avec CIDR 10.0.0.0/16
-   - 2 subnets publics (10.0.1.0/24, 10.0.2.0/24)
-   - 2 subnets privés (10.0.10.0/24, 10.0.11.0/24)
-   - Internet Gateway
-   - NAT Gateway
-   - Route tables
-
-**Livrables :**
-```
-terraform/aws/
-├── architecture-diagram.png (ou .drawio)
-├── vpc.tf
-├── subnets.tf
-├── routing.tf
-├── variables.tf
-└── README.md (explication des choix)
-```
+2. **Document architecture.md** expliquant :
+   - Choix techniques (pourquoi Multi-AZ, ALB, etc.)
+   - Estimation coûts mensuelle (approximative)
+   - Stratégie haute disponibilité
 
 **Critères d'évaluation :**
-- ✅ Architecture haute disponibilité
-- ✅ Segmentation réseau sécurisée
-- ✅ Justification des choix techniques
-- ✅ Estimation des coûts (dans README)
+- ✅ Diagramme complet : 5 pts
+- ✅ Justifications pertinentes : 3 pts
+- ✅ Estimation coûts : 2 pts
 
 ---
 
-## 🐳 PARTIE 2 — Orchestration Kubernetes
+## 🐳 EXERCICE 2 — Kubernetes & Monitoring (2h)
 
-### Exercice 2.1 — Déploiement Kubernetes Local
-**Contexte :** Vous devez conteneuriser et orchestrer les applications AEIG avec Kubernetes.
+### Contexte
+Déployer une application sur Kubernetes local avec monitoring.
 
-**Tâches :**
-1. Activer Kubernetes dans Docker Desktop
-2. Créer les manifestes Kubernetes pour déployer :
-   - **Deployment** : Application Node.js (3 replicas)
-   - **Service** : ClusterIP pour l'app
-   - **Ingress** : Exposition via nginx-ingress
-   - **ConfigMap** : Variables d'environnement
-   - **Secret** : Credentials DB (base64)
-   - **PersistentVolumeClaim** : Stockage pour uploads
+### Tâches
 
-3. Implémenter :
-   - **Liveness probe** : `/health` endpoint
-   - **Readiness probe** : `/ready` endpoint
-   - **Resource limits** : CPU 500m, Memory 512Mi
-   - **HorizontalPodAutoscaler** : Scale 2-5 replicas si CPU > 70%
+#### 2.1 Déploiement Kubernetes 
 
-**Livrables :**
+**Créer les manifestes K8s pour :**
+
+1. **Namespace** : `aeig-prod`
+
+2. **Deployment** :
+   - Image : `nginx:alpine`
+   - 3 replicas
+   - Labels : `app=aeig-web`, `env=prod`
+   - Liveness probe : `/` (HTTP GET port 80)
+   - Readiness probe : `/` (HTTP GET port 80)
+   - Resources : CPU 200m, Memory 256Mi
+
+3. **Service** :
+   - Type : ClusterIP
+   - Port : 80
+
+4. **ConfigMap** :
+   - Variables : `CAMPUS=Cotonou`, `ENV=production`
+
+5. **HorizontalPodAutoscaler** :
+   - Min : 2, Max : 5
+   - Target CPU : 70%
+
+**Structure attendue :**
 ```
 kubernetes/
 ├── namespace.yaml
 ├── deployment.yaml
 ├── service.yaml
-├── ingress.yaml
 ├── configmap.yaml
-├── secret.yaml
-├── pvc.yaml
 ├── hpa.yaml
 └── README.md (commandes kubectl)
 ```
 
-**Critères d'évaluation :**
-- ✅ Manifestes valides et fonctionnels
-- ✅ Bonnes pratiques K8s (labels, selectors)
-- ✅ Autoscaling configuré
-- ✅ Documentation des tests
 
----
 
-### Exercice 2.2 — Helm Chart
-**Contexte :** Faciliter le déploiement multi-environnements avec Helm.
+#### 2.2 Monitoring Stack (15 points)
 
-**Tâches :**
-1. Créer un Helm Chart pour l'application :
-   - Templates pour tous les manifestes K8s
-   - Values.yaml avec paramètres par environnement
-   - Helpers pour labels communs
+**Déployer avec Docker Compose :**
+- Prometheus (collecte métriques)
+- Grafana (visualisation)
+- Node Exporter (métriques système)
 
-2. Créer 3 fichiers values :
-   - `values-dev.yaml` : 1 replica, resources minimales
-   - `values-staging.yaml` : 2 replicas
-   - `values-prod.yaml` : 3 replicas, resources élevées
+**Fichier : `monitoring/docker-compose.yml`**
 
-**Livrables :**
-```
-helm/
-├── Chart.yaml
-├── values.yaml
-├── values-dev.yaml
-├── values-staging.yaml
-├── values-prod.yaml
-└── templates/
-    ├── deployment.yaml
-    ├── service.yaml
-    ├── ingress.yaml
-    └── _helpers.tpl
-```
+**Configuration Prometheus :**
+- Scraper Node Exporter toutes les 15s
+- 1 règle d'alerte : CPU > 80% pendant 5min
 
-**Critères d'évaluation :**
-- ✅ Chart installable avec `helm install`
-- ✅ Paramétrage flexible
-- ✅ Documentation Helm
+**Dashboard Grafana :**
+- Importer un dashboard Node Exporter (ID: 1860)
+- Documenter l'accès (URL, credentials)
 
----
 
-## 🌍 PARTIE 3 — Architecture Multi-Campus
 
-### Exercice 3.1 — Stratégie de Réplication
-**Contexte :** AEIG a 2 campus (Cotonou, Abidjan) qui doivent partager certaines données.
+## 🌍 EXERCICE 3 — Architecture Multi-Campus (1h - 15 points)
 
-**Tâches :**
-1. Concevoir une architecture de réplication de base de données :
-   - Schéma Master-Slave ou Master-Master
-   - Diagramme de flux de données
-   - Stratégie de résolution de conflits
+### Contexte
+Concevoir la stratégie pour connecter 2 campus (Cotonou, Abidjan).
 
-2. Implémenter avec Docker Compose :
-   - 2 conteneurs PostgreSQL (cotonou-db, abidjan-db)
-   - Configuration de réplication streaming
-   - Script de test de failover
+### Tâches
 
-**Livrables :**
-```
-multi-campus/
-├── architecture-replication.md
-├── docker-compose-replication.yml
-├── postgres-master/
-│   └── postgresql.conf
-├── postgres-slave/
-│   └── postgresql.conf
-└── scripts/
-    ├── setup-replication.sh
-    └── test-failover.sh
-```
+#### 3.1 Plan Réseau (8 points)
 
-**Critères d'évaluation :**
-- ✅ Réplication fonctionnelle
-- ✅ Plan de disaster recovery
-- ✅ Documentation des procédures
+**Créer un document `network-plan.md` avec :**
 
----
+1. **Plan d'adressage IP :**
+   - Campus Cotonou : 10.1.0.0/16
+   - Campus Abidjan : 10.2.0.0/16
+   - Segmentation VLAN :
+     - VLAN 10 : Administration
+     - VLAN 20 : Étudiants
+     - VLAN 30 : Serveurs
+     - VLAN 40 : IoT
 
-## 📊 PARTIE 4 — Monitoring, Logging & Sécurité
+2. **Architecture VPN Site-to-Site :**
+   - Type : IPsec ou WireGuard
+   - Schéma de connexion
+   - Firewall rules principales
 
-### Exercice 4.1 — Stack d'Observabilité Complète
-**Contexte :** Mettre en place une solution de monitoring production-grade.
 
-**Tâches :**
-1. Déployer avec Docker Compose :
-   - **Prometheus** : Collecte de métriques
-   - **Grafana** : Dashboards
-   - **Alertmanager** : Alertes (email/webhook simulé)
-   - **Loki** : Logs centralisés
-   - **Promtail** : Collecteur de logs
-   - **Node Exporter** : Métriques système
+#### 3.2 Réplication Base de Données (7 points)
 
-2. Configurer :
-   - Dashboard Grafana avec :
-     - CPU/Memory/Disk usage
-     - Requêtes HTTP (latency, error rate)
-     - Database connections
-     - Uptime SLA
-   - Règles d'alerte Prometheus :
-     - CPU > 80% pendant 5min
-     - Error rate > 5%
-     - Disk usage > 85%
-     - Service down
+**Créer un document `database-replication.md` avec :**
 
-3. Créer un **runbook** (playbook de réaction) :
-   - Procédure si alerte "High CPU"
-   - Procédure si alerte "Service Down"
-   - Procédure si alerte "Database Slow"
+1. **Stratégie de réplication :**
+   - Master-Slave ou Master-Master ?
+   - Justification du choix
+   - Schéma de flux de données
 
-**Livrables :**
-```
-monitoring/
-├── docker-compose-monitoring.yml
-├── prometheus/
-│   ├── prometheus.yml
-│   └── alerts.yml
-├── grafana/
-│   └── dashboards/
-│       └── infrastructure-dashboard.json
-├── alertmanager/
-│   └── alertmanager.yml
-├── loki/
-│   └── loki-config.yml
-└── runbooks/
-    ├── high-cpu.md
-    ├── service-down.md
-    └── database-slow.md
-```
+2. **Plan Disaster Recovery :**
+   - RPO (Recovery Point Objective) : < 1h
+   - RTO (Recovery Time Objective) : < 4h
+   - Procédure de failover (étapes)
 
-**Critères d'évaluation :**
-- ✅ Stack complète fonctionnelle
-- ✅ Dashboard pertinent
-- ✅ Alertes configurées
-- ✅ Runbooks détaillés
+3. **Backup Strategy :**
+   - Fréquence des backups
+   - Rétention (combien de jours)
+   - Stockage (local + cloud)
 
----
-
-### Exercice 4.2 — Sécurité & Hardening
-**Contexte :** Sécuriser l'infrastructure et les conteneurs.
-
-**Tâches :**
-1. Scanner les vulnérabilités :
-   - Utiliser **Trivy** pour scanner les images Docker
-   - Générer un rapport de vulnérabilités
-   - Proposer des correctifs
-
-2. Hardening des conteneurs :
-   - Images multi-stage (réduire la surface d'attaque)
-   - User non-root dans Dockerfile
-   - Read-only filesystem où possible
-   - Secrets via Docker secrets (pas d'env vars)
-
-3. Créer un document de **politique de sécurité** :
-   - Gestion des secrets (Vault, AWS Secrets Manager)
-   - Rotation des credentials
-   - Backup & encryption
-   - Procédure en cas de breach
-
-**Livrables :**
-```
-security/
-├── trivy-scan-report.txt
-├── Dockerfile.hardened
-├── docker-compose-secrets.yml
-└── security-policy.md
-```
-
-**Critères d'évaluation :**
-- ✅ Scan de vulnérabilités effectué
-- ✅ Dockerfile sécurisé
-- ✅ Politique de sécurité complète
 
 
 
 ## 📦 Livrables Finaux
 
 ```
-technical-test-lead-infra/
+technical-test-lead-infra-5h/
 ├── terraform/
-│   ├── local/          (Exercice 1.1)
-│   └── aws/            (Exercice 1.2)
-├── kubernetes/         (Exercice 2.1)
-├── helm/               (Exercice 2.2)
-├── multi-campus/       (Exercice 3.1)
-├── network/            (Exercice 3.2)
-├── monitoring/         (Exercice 4.1)
-├── security/           (Exercice 4.2)
-└── README.md           (Instructions globales)
+│   ├── main.tf
+│   ├── variables.tf
+│   ├── outputs.tf
+│   ├── terraform.tfvars.example
+│   └── README.md
+├── architecture/
+│   ├── aws-architecture-diagram.png (ou .drawio)
+│   └── architecture.md
+├── kubernetes/
+│   ├── namespace.yaml
+│   ├── deployment.yaml
+│   ├── service.yaml
+│   ├── configmap.yaml
+│   ├── hpa.yaml
+│   └── README.md
+├── monitoring/
+│   ├── docker-compose.yml
+│   ├── prometheus/
+│   │   └── prometheus.yml
+│   └── README.md
+├── multi-campus/
+│   ├── network-plan.md
+│   └── database-replication.md
+├── answers.md
+└── README.md (instructions globales)
 ```
+
+
+
+
 
 ---
 
+## 🚨 Critères Éliminatoires
 
-
-## 📊 Barème d'Évaluation
-
-| Critère | Points | Détails |
-|---------|--------|---------|
-| **IaC (Terraform)** | 35% | Modularité, bonnes pratiques, documentation |
-| **Orchestration (K8s/Helm)** | 30% | Manifestes valides, scalabilité, autoscaling |
-| **Architecture Multi-Campus** | 20% | Réplication, réseau, résilience |
-| **Monitoring & Sécurité** | 15% | Observabilité, alertes, hardening |
+- ❌ Secrets/credentials commitées dans Git
+- ❌ Aucun exercice complété 
+- ❌ Plagiat évident
 
 ---
 
 ## 🚀 Soumission
 
-1. **Fork** le repository GitHub
-2. Créer une branche `lead-infra/<votre-nom>`
-3. Commits réguliers avec messages clairs
-4. **Pull Request** avec titre : `[Lead Infra] Prénom NOM`
+1. **Fork** le repository
+2. Créer une branche `lead-infra-5h/<prenom-nom>`
+3. Commits réguliers
+4. **Pull Request** avec titre : `[Lead Infra 5h] Prénom NOM`
 5. Dans la PR, inclure :
-   - Résumé des choix techniques
-   - Temps passé par partie
+   - Temps réel passé
    - Difficultés rencontrées
-   - Améliorations futures
-
----
-
-## 📞 Support Technique
-
-En cas de blocage technique (installation, configuration) :
-- Documenter le problème dans `ISSUES.md`
-- Proposer une solution alternative
-- Continuer sur les autres exercices
-
-**Note :** La capacité à débloquer des situations techniques fait partie de l'évaluation.
+   - Ce que vous auriez amélioré avec plus de temps
 
 ---
 
 ## ✅ Checklist Avant Soumission
 
-- [ ] Tous les fichiers sont versionnés (Git)
-- [ ] Pas de secrets/credentials commitées
-- [ ] README.md avec instructions claires
-- [ ] Code testé et fonctionnel
-- [ ] Documentation complète
-- [ ] answers-lead.md rempli
+- [ ] Terraform fonctionne (`terraform apply`)
+- [ ] Kubernetes déployé (`kubectl get pods`)
+- [ ] Monitoring accessible (Grafana)
+- [ ] Documents architecture créés
+- [ ] answers.md complété
+- [ ] README.md avec instructions
+- [ ] Pas de secrets commitées
 - [ ] Pull Request créée
+
+---
+
+## 💡 Conseils
+
+### Priorisation
+Si vous manquez de temps, priorisez dans cet ordre :
+1. **Exercice 1.1** (Terraform) - Essentiel
+2. **Exercice 2.1** (Kubernetes) - Essentiel
+3. **Questions** - Rapide et valorisant
+4. **Exercice 2.2** (Monitoring) - Important
+5. **Exercice 3** (Architecture) - Conceptuel
+6. **Exercice 1.2** (AWS) - Bonus
+
+### Efficacité
+- Utilisez des templates/exemples existants (documentez vos sources)
+- Commentez votre code pour gagner du temps sur la doc
+- Testez au fur et à mesure (ne pas tout faire puis tester)
+- Si un exercice bloque, passez au suivant
+
+### Documentation
+- README minimal mais clair
+- Commandes essentielles pour reproduire
+- Expliquez vos choix techniques
+
+---
+
+## 📞 Support Technique
+
+En cas de blocage :
+- Documenter le problème dans votre README
+- Proposer une solution alternative
+- Continuer sur les autres exercices
+
+**La capacité à gérer les imprévus fait partie de l'évaluation.**
 
 ---
 
 **Bonne chance ! 🚀**
 
-*Ce test évalue votre capacité à concevoir, déployer et maintenir une infrastructure robuste pour un environnement éducatif multi-campus. Nous recherchons un profil sénior capable de prendre des décisions architecturales stratégiques.*
+*Ce test évalue votre capacité à livrer rapidement une infrastructure fonctionnelle tout en démontrant une vision stratégique.*
