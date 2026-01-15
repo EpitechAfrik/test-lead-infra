@@ -227,40 +227,6 @@ multi-campus/
 
 ---
 
-### Exercice 3.2 — Réseau VPN Site-to-Site (Conception)
-**Contexte :** Connecter les campus Cotonou et Abidjan de manière sécurisée.
-
-**Tâches :**
-1. Concevoir l'architecture réseau :
-   - Plan d'adressage IP (Cotonou: 10.1.0.0/16, Abidjan: 10.2.0.0/16)
-   - VPN IPsec ou WireGuard
-   - Segmentation VLAN (Admin, Étudiants, Serveurs, IoT)
-   - Firewall rules
-
-2. Simuler avec Docker :
-   - 2 réseaux Docker isolés (cotonou-net, abidjan-net)
-   - Conteneur VPN gateway (WireGuard) 
-   - Test de connectivité inter-réseaux
-
-**Livrables :**
-```
-network/
-├── network-architecture.md
-├── ip-addressing-plan.xlsx (ou .csv)
-├── firewall-rules.md
-├── docker-compose-vpn.yml
-└── wireguard/
-    ├── wg0-cotonou.conf
-    └── wg0-abidjan.conf
-```
-
-**Critères d'évaluation :**
-- ✅ Architecture sécurisée
-- ✅ Plan d'adressage cohérent
-- ✅ VPN fonctionnel (simulé)
-
----
-
 ## 📊 PARTIE 4 — Monitoring, Logging & Sécurité
 
 ### Exercice 4.1 — Stack d'Observabilité Complète
