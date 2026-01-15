@@ -15,17 +15,16 @@
 
 ## 📋 Structure du Test (3 exercices + Questions)
 
-| Partie | Temps | Points |
+| Partie | Temps estimé| Points |
 |--------|-------|--------|
 | **Exercice 1** : Infrastructure as Code | 1h30 | 35 |
 | **Exercice 2** : Kubernetes & Monitoring | 2h | 40 |
 | **Exercice 3** : Architecture Multi-Campus | 1h | 15 |
-| **Questions Stratégiques** | 30min | 10 |
 | **TOTAL** | **5h** | **100** |
 
 ---
 
-## 🏗️ EXERCICE 1 — Infrastructure as Code (1h30 - 35 points)
+## 🏗️ EXERCICE 1 — Infrastructure as Code 
 
 ### Contexte
 Créer une infrastructure reproductible pour héberger les plateformes AEIG (LMS, CRM).
@@ -58,16 +57,10 @@ terraform apply
 terraform destroy
 ```
 
-**Critères d'évaluation :**
-- ✅ Code fonctionnel (terraform apply sans erreur) : 10 pts
-- ✅ Variables paramétrables : 5 pts
-- ✅ Outputs utiles (IPs, ports) : 3 pts
-- ✅ Volume persistant DB : 4 pts
-- ✅ Documentation claire : 3 pts
 
 ---
 
-#### 1.2 Architecture Cloud AWS (10 points)
+#### 1.2 Architecture Cloud AWS 
 Concevoir l'architecture pour migrer vers AWS.
 
 **Livrables :**
@@ -90,14 +83,14 @@ Concevoir l'architecture pour migrer vers AWS.
 
 ---
 
-## 🐳 EXERCICE 2 — Kubernetes & Monitoring (2h - 40 points)
+## 🐳 EXERCICE 2 — Kubernetes & Monitoring (2h)
 
 ### Contexte
 Déployer une application sur Kubernetes local avec monitoring.
 
 ### Tâches
 
-#### 2.1 Déploiement Kubernetes (25 points)
+#### 2.1 Déploiement Kubernetes 
 
 **Créer les manifestes K8s pour :**
 
@@ -133,14 +126,7 @@ kubernetes/
 └── README.md (commandes kubectl)
 ```
 
-**Critères d'évaluation :**
-- ✅ Manifestes valides (kubectl apply fonctionne) : 10 pts
-- ✅ Probes configurées : 5 pts
-- ✅ HPA fonctionnel : 5 pts
-- ✅ Application accessible : 3 pts
-- ✅ Documentation : 2 pts
 
----
 
 #### 2.2 Monitoring Stack (15 points)
 
@@ -159,12 +145,7 @@ kubernetes/
 - Importer un dashboard Node Exporter (ID: 1860)
 - Documenter l'accès (URL, credentials)
 
-**Critères d'évaluation :**
-- ✅ Stack démarrée (docker-compose up) : 7 pts
-- ✅ Prometheus scrape Node Exporter : 4 pts
-- ✅ Grafana accessible avec dashboard : 4 pts
 
----
 
 ## 🌍 EXERCICE 3 — Architecture Multi-Campus (1h - 15 points)
 
@@ -191,12 +172,6 @@ Concevoir la stratégie pour connecter 2 campus (Cotonou, Abidjan).
    - Schéma de connexion
    - Firewall rules principales
 
-**Critères d'évaluation :**
-- ✅ Plan d'adressage cohérent : 4 pts
-- ✅ Segmentation VLAN justifiée : 2 pts
-- ✅ Architecture VPN claire : 2 pts
-
----
 
 #### 3.2 Réplication Base de Données (7 points)
 
@@ -217,33 +192,8 @@ Concevoir la stratégie pour connecter 2 campus (Cotonou, Abidjan).
    - Rétention (combien de jours)
    - Stockage (local + cloud)
 
-**Critères d'évaluation :**
-- ✅ Stratégie réplication pertinente : 3 pts
-- ✅ Plan DR réaliste : 2 pts
-- ✅ Backup strategy complète : 2 pts
 
----
 
-## 🎤 QUESTIONS STRATÉGIQUES (30min - 10 points)
-
-Répondre dans `answers.md` (5-10 lignes par question) :
-
-### Q1 : Scalabilité Multi-Campus (2 points)
-AEIG prévoit d'ouvrir 3 nouveaux campus dans 2 ans. Comment architectureriez-vous l'infrastructure pour supporter cette croissance ? (Considérer : coûts, latence, gestion centralisée)
-
-### Q2 : CI/CD Sans Interruption (2 points)
-Comment déployez-vous une mise à jour du LMS utilisé par 5000 étudiants sans interruption de service ? (Stratégie de déploiement)
-
-### Q3 : Optimisation Coûts Cloud (2 points)
-Quelles 3 actions concrètes mettriez-vous en place pour réduire de 30% les coûts AWS tout en maintenant la performance ?
-
-### Q4 : Incident Management (2 points)
-Le site web de l'école subit une attaque DDoS. Décrivez votre processus de réponse (5 étapes principales).
-
-### Q5 : Organisation Équipe (2 points)
-Comment structureriez-vous une équipe infrastructure/DevOps pour gérer 3 campus ? (Rôles, responsabilités, on-call)
-
----
 
 ## 📦 Livrables Finaux
 
@@ -277,46 +227,16 @@ technical-test-lead-infra-5h/
 └── README.md (instructions globales)
 ```
 
----
 
-## ⏱️ Planning Recommandé
 
-| Temps | Activité |
-|-------|----------|
-| 0h00 - 0h10 | Lecture du test, setup environnement |
-| 0h10 - 1h40 | **Exercice 1** : Terraform + Architecture AWS |
-| 1h40 - 3h40 | **Exercice 2** : Kubernetes + Monitoring |
-| 3h40 - 4h40 | **Exercice 3** : Multi-Campus (réseau + DB) |
-| 4h40 - 5h00 | **Questions** + Relecture |
 
----
-
-## 📊 Barème d'Évaluation
-
-### Score Total : 100 points
-
-| Exercice | Points | Détails |
-|----------|--------|---------|
-| **Exercice 1** | 35 | Terraform (25) + Architecture AWS (10) |
-| **Exercice 2** | 40 | Kubernetes (25) + Monitoring (15) |
-| **Exercice 3** | 15 | Réseau (8) + Réplication DB (7) |
-| **Questions** | 10 | 5 questions × 2 points |
-
-### Interprétation
-
-| Score | Niveau | Décision |
-|-------|--------|----------|
-| 85-100 | **Excellent** | ✅ Recommandé fortement |
-| 70-84 | **Très bon** | ✅ Recommandé |
-| 55-69 | **Bon** | ⚠️ À discuter |
-| < 55 | **Insuffisant** | ❌ Non recommandé pour Lead |
 
 ---
 
 ## 🚨 Critères Éliminatoires
 
 - ❌ Secrets/credentials commitées dans Git
-- ❌ Aucun exercice complété (< 30 points)
+- ❌ Aucun exercice complété 
 - ❌ Plagiat évident
 
 ---
