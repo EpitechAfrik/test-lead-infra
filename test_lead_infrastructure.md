@@ -239,7 +239,7 @@ multi-campus/
 
 2. Simuler avec Docker :
    - 2 réseaux Docker isolés (cotonou-net, abidjan-net)
-   - Conteneur VPN gateway (WireGuard)
+   - Conteneur VPN gateway (WireGuard) 
    - Test de connectivité inter-réseaux
 
 **Livrables :**
@@ -355,37 +355,7 @@ security/
 - ✅ Dockerfile sécurisé
 - ✅ Politique de sécurité complète
 
----
 
-## 🎤 PARTIE 5 — Questions Stratégiques (answers-lead.md)
-
-Répondre aux questions suivantes (2-3 paragraphes par question) :
-
-### Infrastructure
-1. **Multi-campus scalability** : Comment architectureriez-vous l'infrastructure pour supporter 5 nouveaux campus dans les 2 prochaines années ? (Considérer coûts, latence, résilience)
-
-2. **Disaster Recovery** : Décrivez votre stratégie de DR pour garantir RPO < 1h et RTO < 4h en cas de panne totale du datacenter Cotonou.
-
-3. **Optimisation des coûts cloud** : Quelles stratégies mettriez-vous en place pour réduire de 30% les coûts AWS/Azure tout en maintenant la performance ?
-
-### DevOps & Automation
-4. **CI/CD pour plateformes critiques** : Comment gérez-vous le déploiement d'un LMS utilisé par 5000 étudiants sans interruption de service ?
-
-5. **Infrastructure as Code** : Pourquoi choisir Terraform plutôt qu'Ansible pour l'IaC ? Dans quels cas utiliseriez-vous les deux ?
-
-### Sécurité & Compliance
-6. **Zero Trust Architecture** : Comment implémenteriez-vous une architecture Zero Trust pour sécuriser l'accès aux ressources internes ?
-
-7. **Gestion des incidents** : Décrivez votre processus de gestion d'une attaque DDoS sur les services web de l'école.
-
-### Leadership & Organisation
-8. **Structuration de l'équipe** : Comment organiseriez-vous une équipe infrastructure/DevOps pour gérer 3 campus ? (Rôles, responsabilités, on-call)
-
-9. **Documentation & Knowledge Transfer** : Quelle stratégie pour documenter l'infrastructure et former les équipes locales sur chaque campus ?
-
-10. **Innovation & Labs** : Comment concevriez-vous l'infrastructure pour les labs spécialisés (IA Sandbox, CyberLab, Cloud Lab) tout en isolant les environnements ?
-
----
 
 ## 📦 Livrables Finaux
 
@@ -406,17 +376,7 @@ technical-test-lead-infra/
 
 ---
 
-## ⏱️ Durée Recommandée
-**16 à 20 heures** réparties sur 3-4 jours
 
-**Suggestion de planning :**
-- Jour 1 (5h) : Partie 1 (Terraform)
-- Jour 2 (5h) : Partie 2 (Kubernetes)
-- Jour 3 (4h) : Partie 3 (Multi-campus)
-- Jour 4 (4h) : Partie 4 (Monitoring/Sécurité)
-- Jour 4 (2h) : Partie 5 (Questions)
-
----
 
 ## 📊 Barème d'Évaluation
 
@@ -426,26 +386,6 @@ technical-test-lead-infra/
 | **Orchestration (K8s/Helm)** | 30% | Manifestes valides, scalabilité, autoscaling |
 | **Architecture Multi-Campus** | 20% | Réplication, réseau, résilience |
 | **Monitoring & Sécurité** | 15% | Observabilité, alertes, hardening |
-| **Questions Stratégiques** | Bonus | Vision, leadership, expertise |
-
-### Grille de notation détaillée
-
-#### Niveau Sénior attendu (80-100%)
-- ✅ Tous les exercices complétés
-- ✅ Code production-ready
-- ✅ Documentation exhaustive
-- ✅ Bonnes pratiques respectées
-- ✅ Réponses stratégiques pertinentes
-
-#### Niveau Confirmé (60-79%)
-- ✅ Exercices principaux complétés
-- ⚠️ Quelques approximations
-- ⚠️ Documentation partielle
-
-#### Niveau Junior (< 60%)
-- ❌ Exercices incomplets
-- ❌ Erreurs techniques majeures
-- ❌ Documentation insuffisante
 
 ---
 
