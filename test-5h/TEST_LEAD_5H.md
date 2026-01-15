@@ -15,12 +15,12 @@
 
 ## 📋 Structure du Test (3 exercices + Questions)
 
-| Partie | Temps estimé| Points |
+| Partie | Points |
 |--------|-------|--------|
-| **Exercice 1** : Infrastructure as Code | 1h30 | 35 |
-| **Exercice 2** : Kubernetes & Monitoring | 2h | 40 |
-| **Exercice 3** : Architecture Multi-Campus | 1h | 15 |
-| **TOTAL** | **5h** | **100** |
+| **Exercice 1** : Infrastructure as Code | 35 |
+| **Exercice 2** : Kubernetes & Monitoring | 40 |
+| **Exercice 3** : Architecture Multi-Campus | 15 |
+| **TOTAL**  **100** |
 
 ---
 
